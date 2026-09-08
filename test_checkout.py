@@ -3,10 +3,15 @@ from selenium import webdriver
 from login_page import LoginPage
 from checkout_page import CheckoutPage
 from products_page import ProductsPage
+from selenium.webdriver.chrome.options import Options
 
 @pytest.fixture
 def driver():
-    d = webdriver.Chrome()
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    d = webdriver.Chrome(options=options)
     yield d
     d.quit()
 
